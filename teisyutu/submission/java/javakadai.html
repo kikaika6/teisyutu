@@ -1,0 +1,100 @@
+<!-- 以下の条件を正規表現でチェックする入力フォームを作成しなさい
+
+１．「ABC」から始まる文字列
+２．「ABC」から始まり「XYZ」で終わる文字列
+３．「DEF」が含まれる文字列
+４．「@」の前後に１文字以上存在している文字列
+５．０～９までの整数で構成される3ケタの数字
+６．数字と大文字アルファベットを含まない文字列<!DOCTYPE html> -->
+<html lang="ja">
+    <head>
+    </head>
+    <body>
+        <div id="message">
+        </div>
+        <form>
+            <hr/>
+            <label>「ABC」から始まる文字列：</label>
+            <input type="text" name="name"  id="inputABC" maxlength="100" value="">
+            <br/>
+            <label>「ABC」から始まり「XYZ」で終わる文字列：</label>
+            <input type="number" name="age" id="inputXYZ" maxlength="100" value="">
+            <br/>
+            <label>「DEF」が含まれる文字列：</label>
+            <input type="text" name="mail" id="inputDEF" maxlength="100" value="" >
+            <br/>
+            <label>「@」の前後に１文字以上存在している文字列：</label>
+            <input type="text" name="mail" id="inputAtto" maxlength="100" value="" >
+            <br/>
+            <label>０～９までの整数で構成される3ケタの数字：</label>
+            <input type="text" name="mail" id="inputmath" maxlength="100" value="" >
+            <br/>
+            <label>数字と大文字アルファベットを含まない文字列：</label>
+            <input type="text" name="mail" id="inputnomath" maxlength="100" value="" >
+            <br/>
+            <input type="button" id="btnSubmit" value="送信">
+            <hr/>
+        </form>
+    </body>
+
+    <script>
+      window.onload = function(){
+          /*各画面オブジェクト*/
+          const btnSubmit = document.getElementById('btnSubmit');
+          const inputABC = document.getElementById('inputABC');
+          const inputXYZ = document.getElementById('inputXYZ');
+          const inputDEF = document.getElementById('inputDEF');
+          const inputAtto = document.getElementById('inputAtto');
+          const inputmath = document.getElementById('inputmath');
+          const inputnomath = document.getElementById('inputnomath');
+          const ABCreg = /^ABC[A-Z]$/;
+          const XYZreg = /^ABC[A-Z]*XYZ$/;
+          const DEFreg = /^[?=DEF]*$/;
+          const Attoreg = /^[A-Z]@[A-Z]*/;
+          const mathreg = /^[0-9]{3}$/;
+          const nomathreg = /^[^0-9A-Z]*$/;
+
+          
+          
+          btnSubmit.addEventListener('click', function(event) {
+              let message = [];
+              /*入力値チェック*/
+              if(inputABC.value ==""){
+                  message.push("「ABC」から始まる文字列が未入力です。");
+              }else if(!ABCreg.test(inputABC.value)){
+                  message.push("パスワードの形式が不正です");
+               }
+              if(inputXYZ.value==""){
+                  message.push("「ABC」から始まり「XYZ」で終わる文字列");
+              }else if(!agereg.test(inputXYZ.value)){
+                  message.push("パスワードの形式が不正です");
+               }
+              if(inputDEF.value==""){
+                  message.push("「DEF」が含まれる文字列");
+              }else if(!pwreg.test(inputDEF.value)){
+                  message.push("パスワードの形式が不正です。");
+              }
+              if(inputAtto.value==""){
+                  message.push("「@」の前後に１文字以上存在している文字列");
+              }else if(!pwreg.test(inputAtto.value)){
+                  message.push("パスワードの形式が不正です。");
+              }
+              if(inputmath.value==""){
+                  message.push("０～９までの整数で構成される3ケタの数字");
+              }else if(!pwreg.test(inputmath.value)){
+                  message.push("パスワードの形式が不正です。");
+              }
+              if(inputnomath.value==""){
+                  message.push("数字と大文字アルファベットを含まない文字列");
+              }else if(!pwreg.test(inputnomath.value)){
+                  message.push("パスワードの形式が不正です。");
+              }
+              if(message.length > 0){
+                  alert(message);
+                  return;
+              }
+              alert('入力チェックOK');
+          });
+      };
+   </script>
+</html>
